@@ -22,5 +22,13 @@ export type GovernmentBuildingType = {
     type: "HOSPITAL" | "FIRE-STATION"
     budget: number
     staffCount: number
-    address: AddressType
+    address: GovernmentAddressType
+}
+
+export type GovernmentAddressType = {
+    street: GovernmentAddressStreetType
+}
+
+export type GovernmentAddressStreetType = {
+    title: string
 }
