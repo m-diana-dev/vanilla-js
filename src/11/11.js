@@ -133,6 +133,56 @@
 
 //==============================7
 
+// const fetch = (url) => {
+//     return new Promise((resolve, reject)=>{
+//         switch (url){
+//             case 'google':{
+//                 setTimeout(()=>{
+//                     resolve({data: 'data from google'})
+//                 },3000)
+//                 break;
+//             }
+//             case 'microsoft':{
+//                 setTimeout(()=>{
+//                     resolve({data: 'data from microsoft'})
+//                 },5000)
+//                 break;
+//             }
+//             case 'it-incubator':{
+//                 setTimeout(()=>{
+//                     resolve({data: 'data from it-incubator'})
+//                 },500)
+//                 break;
+//             }
+//         }
+//     })
+// }
+
+
+//запросы выполняются примерно одновременно
+// fetch('google')
+//     .then(data=>console.log(data))
+// fetch('microsoft')
+//     .then(data=>console.log(data))
+// fetch('it-incubator')
+//     .then(data=>console.log(data))
+
+//запросы выполняются последовательно
+// fetch('google')
+//     .then(data=>{
+//         console.log(data)
+//         return fetch('microsoft')
+//     })
+//     .then(data=>{
+//         console.log(data)
+//         return fetch('it-incubator')
+//     })
+//     .then(data=>console.log(data))
+
+//==============================7
+
+//==============================8
+
 const fetch = (url) => {
     return new Promise((resolve, reject)=>{
         switch (url){
@@ -158,25 +208,21 @@ const fetch = (url) => {
     })
 }
 
+const makeRequest = async () => {
+    let data = await fetch('google')
+    console.log(data)
+    data = await fetch('microsoft')
+    console.log(data)
+    data = await fetch('it-incubator')
+    console.log(data)
+}
 
-//запросы выполняются примерно одновременно
-// fetch('google')
-//     .then(data=>console.log(data))
-// fetch('microsoft')
-//     .then(data=>console.log(data))
-// fetch('it-incubator')
-//     .then(data=>console.log(data))
+const makeRequestAtTheOneMoment = async () => {
+    const promises = [fetch('google'),fetch('microsoft'),fetch('it-incubator')]
 
-//запросы выполняются последовательно
-fetch('google')
-    .then(data=>{
-        console.log(data)
-        return fetch('microsoft')
-    })
-    .then(data=>{
-        console.log(data)
-        return fetch('it-incubator')
-    })
-    .then(data=>console.log(data))
+    let data = await Promise.all(promises)
+}
 
-//==============================7
+makeRequestAtTheOneMoment()
+
+//==============================8
