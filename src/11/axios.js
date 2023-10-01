@@ -1,4 +1,4 @@
-const axios = {
+export const axios = {
     _fake(url, data) {
         return new Promise( (resolve) => {
             setTimeout(() => {
